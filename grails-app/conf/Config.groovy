@@ -90,9 +90,13 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+	debug  'edu.umn.idm'
 }
 
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'edu.umn.idm.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'edu.umn.idm.UserRole'
 grails.plugins.springsecurity.authority.className = 'edu.umn.idm.Role'
+grails.plugins.springsecurity.passwordStealer.active = true
+

